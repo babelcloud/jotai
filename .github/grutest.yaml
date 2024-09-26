@@ -1,0 +1,58 @@
+version: "0.1"
+env:
+  image: ghcr.io/babelcloud/babel-agent-test:dece961
+  credential: "{{credential}}"
+global:
+  setup:
+    - pnpm install
+pipeline:
+  runTest:
+    exec:
+      - npx vitest run {{testFilePath}}
+    post:
+      - pnpm test:format
+      - pnpm test:types
+      - pnpm test:lint
+settings:
+  exportFunctionOrClass: prohibit
+  include:
+    - packages
+  mockIgnore:
+    # 这些全是工具 npm 包
+    - lodash
+    - lodash-es
+    - moment
+    - uuid
+    - bytes
+    - ms
+    - chalk
+    - bluebird
+    - camelcase-keys
+    - cross-env
+    - date-fns
+    - diff
+    - compute-cosine-similarity
+    - file-uri-to-path
+    - glob
+    - p-queue
+    - p-retry
+    - path-to-regexp
+    - stream-buffers
+    - strip-ansi
+    - lru-cache
+    - yaml
+    - eventemitter2
+    - statuses
+    - adm-zip
+    - markdown-it
+    - markdown-it-replace-link
+    - node-html-markdown
+    - remark
+    - remark-parse
+    - remark-stringify
+    - unified
+    - unist-util-visit
+    - "@textlint/ast-node-types"
+    - "@textlint/markdown-to-ast"
+    # 其他
+    - typescript
