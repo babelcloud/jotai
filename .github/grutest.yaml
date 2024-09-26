@@ -7,6 +7,9 @@ global:
     - pnpm install
 pipeline:
   runTest:
+    pre:
+      - npx prettier {{testFilePath}} --write
+      - eslint --fix --no-eslintrc --c .eslintrc.json {{testFilePath}}
     exec:
       - npx vitest run {{testFilePath}}
     post:
