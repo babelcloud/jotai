@@ -15,7 +15,7 @@ export default defineConfig({
     // https://vitest.dev/guide/migration.html
     globals: true,
     environment: 'jsdom',
-    dir: 'tests',
+    dir: 'src',
     reporters: 'basic',
     coverage: {
       reporter: ['text', 'json', 'html', 'text-summary'],
